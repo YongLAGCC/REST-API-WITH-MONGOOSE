@@ -8,13 +8,13 @@
 // create a models folder with a ninja file and create schema and model 
 //connect to mongoose by post. 
 //save ninja models to mongoose by mongodb method, then reture it back
-
+//create a geo data model and schema in mongodb(ninja). In app.get, to get the around address
+// create a react front-end 
 
 const express =require('express'); 
 //const routes = require('./routes/api'); //(line 29) import router file here
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose'); //connect mongoose
-
 
 // set up express app
 const app = express(); 
@@ -22,6 +22,10 @@ const app = express();
 mongoose.connect('mongodb://localhost/ninjago');
 mongoose.Promise = global.Promise; // let mongoose promise equals global promise
 // mongoose version promise is deprecated 
+
+// add one more middleware,  front-end
+app.use(express.static('public'));   // html, css static file, with string
+// serve from public folder
 
 app.use(bodyParser.json());   
 
