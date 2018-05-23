@@ -12,12 +12,14 @@ router.get('/ninjas', function(req,res,next){
     // });
     // pass geo
     
-    Ninja.geoNear(
-        {type: "Point", coordinates: [parseFloat(req.query.lng), parseFloat(req.query.lat)]},
-        {maxDistance:100000, spherical: true} // optioins, values provided by users
-    ).then(function(ninjas){
+    Ninja.aggregate().near({
+        near: [parseFloat(req.query.lng), parseFloat(req.query.lat)],
+        maxDistance: 100000,
+        spherical: true,
+        distanceField: 'dis',
+      }).then(function (ninjas) {
         res.send(ninjas);
-    }).catch(next); // promise, fire whtn ninja complate the query
+      }).catch(next)// promise, fire whtn ninja complate the query
     //options
 });
 
